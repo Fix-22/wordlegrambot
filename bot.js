@@ -10,8 +10,8 @@ bot.start(context => {
     context.reply("Benvenuto");
 });
 
-bot.command("name", async context => {
-    context.reply(context.chat.first_name);
+bot.command("new", async context => {
+    context.reply("");
 });
 
 bot.launch();
