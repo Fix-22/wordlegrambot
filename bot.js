@@ -34,6 +34,7 @@ bot.on(message("text"), context => {
 
             if (!game.status()) {
                 if (game.isWon()) {
+                    console.log("aaa")
                     context.reply("Hai vinto!");
                 }
                 else {

@@ -41,6 +41,7 @@ const wordle = (inputWords) => {
         },
         attempt: (inputWord) => {
             if (remainingAttempts <= 0 || inputWord.length !== 5) {
+                started = false;
                 return false;
             }
             
@@ -56,6 +57,7 @@ const wordle = (inputWords) => {
                     wordToDisplay = "<b>" + word + "</b>";
                     row = "🟩🟩🟩🟩🟩";
                     victory = true;
+                    started = false;
                 }
                 else {
                     for (let i = 0; i < word.length; i++) {
@@ -77,6 +79,10 @@ const wordle = (inputWords) => {
                 display[count] = wordToDisplay.toUpperCase();
                 graph[count++] = row;
 
+                if (remainingAttempts <= 0) {
+                    started = false;
+                }
+
                 return true;
             }
             else {
@@ -90,7 +96,7 @@ const wordle = (inputWords) => {
             return graph;
         },
         status: () => {
-            return remainingAttempts > 0 || !victory;
+            return remainingAttempts > 0 && !victory;
         },
         isWon: () => {
             return victory;
