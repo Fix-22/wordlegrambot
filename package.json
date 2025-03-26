@@ -1,0 +1,18 @@
+{
+  "name": "wordlegrambot",
+  "version": "0.1.1",
+  "description": "Telegram bot for WORDLE game",
+  "main": "wordlegrambot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "bot",
+    "telegram"
+  ],
+  "author": "Simone Cecire",
+  "license": "MIT",
+  "dependencies": {
+    "telegraf": "^4.16.3"
+  }
+}
