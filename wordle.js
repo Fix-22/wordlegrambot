@@ -1,6 +1,6 @@
 const wordle = (inputWords) => {
     const words = inputWords;
-    let selectedWord, remainingAttempts, attempts, display;
+    let started = false, selectedWord, remainingAttempts, display, count, graph, victory;
 
     const selectWord = (words) => {
         return words && words.length > 0 ? words[Math.floor(Math.random() * words.length)] : null;
@@ -16,6 +16,7 @@ const wordle = (inputWords) => {
 
     return {
         start: () => {
+            started = true;
             selectedWord = selectWord(words);
             remainingAttempts = 6;
             display = {
@@ -26,6 +27,17 @@ const wordle = (inputWords) => {
                 4: "",
                 5: "",
             }
+            graph = {
+                0: "",
+                1: "",
+                2: "",
+                3: "",
+                4: "",
+                5: "",
+            }
+            count = 0;
+            victory = false;
+            console.log(selectedWord)
         },
         attempt: (inputWord) => {
             if (remainingAttempts <= 0 || inputWord.length !== 5) {
@@ -33,37 +45,63 @@ const wordle = (inputWords) => {
             }
             
             const word = inputWord.toLowerCase();
-            const idx = words.inedxOf();
+            const idx = words.indexOf(word);
 
             if (idx !== -1) {
                 let wordToDisplay = "";
+                let row = "";
                 remainingAttempts--;
 
                 if (word === selectedWord) {
                     wordToDisplay = "<b>" + word + "</b>";
+                    row = "🟩🟩🟩🟩🟩";
+                    victory = true;
                 }
                 else {
                     for (let i = 0; i < word.length; i++) {
-                        if (inputWord[i] === word[i]) {
-                            wordToDisplay += "<b>" + inputWord[i] + "</b>";
+                        if (word[i] === selectedWord[i]) {
+                            wordToDisplay += "<b>" + word[i] + "</b>";
+                            row += "🟩";
                         }
-                        else if (letterInWord(inputWord[i], word)) {
-                            wordToDisplay += "<i>" + inputWord[i] + "</i>";
+                        else if (letterInWord(word[i], selectedWord)) {
+                            wordToDisplay += "<i>" + word[i] + "</i>";
+                            row += "🟨";
                         }
                         else {
-                            wordToDisplay += "<s>" + inputWord[i] + "</s>";
+                            wordToDisplay += "<s>" + word[i] + "</s>";
+                            row += "⬜️";
                         }
                     }
                 }
 
-                display[remainingAttempts % Object.keys(display).length - 1] = word;
+                display[count] = wordToDisplay.toUpperCase();
+                graph[count++] = row;
+
+                return true;
             }
             else {
                 return false;
             }
         },
-        render: () => {
-            console.log(display);
+        display: () => {
+            return display;
+        },
+        graph: () => {
+            return graph;
+        },
+        status: () => {
+            return remainingAttempts > 0 || !victory;
+        },
+        isWon: () => {
+            return victory;
+        },
+        getSelectedWord: () => {
+            return selectedWord;
+        },
+        isStarted: () => {
+            return started;
         }
     };
 }
+
+module.exports = wordle;
