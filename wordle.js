@@ -1,6 +1,6 @@
 const wordle = (inputWords) => {
     const words = inputWords;
-    let started = false, selectedWord, remainingAttempts, display, count, graph, victory;
+    let started, selectedWord, remainingAttempts, display, count, graph, victory;
 
     const selectWord = (words) => { // seleziona randomicamente una parola dall'array delle parole
         return words && words.length > 0 ? words[Math.floor(Math.random() * words.length)] : null;
