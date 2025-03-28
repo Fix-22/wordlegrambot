@@ -6,7 +6,7 @@ const wordle = (inputWords) => {
         return words && words.length > 0 ? words[Math.floor(Math.random() * words.length)] : null;
     };
 
-    const letterInWord = (letter, word) => {
+    const letterInWord = (letter, word,) => {
         for (let i = 0; i < word.length; i++) {
             if (letter === word[i]) {
                 return true;
@@ -28,12 +28,12 @@ const wordle = (inputWords) => {
                 5: "",
             }
             graph = {
-                0: "",
-                1: "",
-                2: "",
-                3: "",
-                4: "",
-                5: "",
+                0: "⬜️⬜️⬜️⬜️⬜️",
+                1: "⬜️⬜️⬜️⬜️⬜️",
+                2: "⬜️⬜️⬜️⬜️⬜️",
+                3: "⬜️⬜️⬜️⬜️⬜️",
+                4: "⬜️⬜️⬜️⬜️⬜️",
+                5: "⬜️⬜️⬜️⬜️⬜️",
             }
             count = 0;
             victory = false;
@@ -41,7 +41,6 @@ const wordle = (inputWords) => {
         },
         attempt: (inputWord) => {
             if (remainingAttempts <= 0 || inputWord.length !== 5) {
-                started = false;
                 return false;
             }
             

@@ -1,3 +1,0 @@
-bold se è giusto
-italic se c'è ma non giusto
-sbarrato se non c'è
