@@ -24,6 +24,21 @@ const token = conf.telegramkey;
 const bot = new Telegraf(token);
 const game = wordle(words);
 
+bot.telegram.setMyCommands([
+    {
+        command: "start",
+        description: "Fa partire il bot."
+    },
+    {
+        command: "new",
+        description: "Per iniziare una nuova partita."
+    },
+    {
+        command: "stop",
+        description: "Per stoppare la partita."
+    }
+]);
+
 bot.start(context => { // metodo per /start
     if (!game.isStarted()) { // controlla se è partito il gioco
         context.reply("Benvenuto.\nPer iniziare una nuova partita usa /new.");
@@ -38,6 +53,16 @@ bot.command("new", async context => { // metodo per /new
     context.reply("Iniziamo!\nScrivi una parola di <b>5</b> lettere." + "\n\n" + Object.values(game.graph()).join("\n"), {"parse_mode": "HTML"});
 });
 
+bot.command("stop", async context => { // metodo per /stop
+    if (game.isStarted()) {
+        game.stop();
+        context.reply("Partita fermata.\nPer iniziare una nuova partita usa /new.");
+    }
+    else {
+        context.reply("Nessuna partita in corso.\nPer iniziare una nuova partita usa /new.");
+    }
+});
+
 bot.on(message("text"), context => { // metodo per controllare i messaggi di testo
     if (game.isStarted()) { // controlla se è partito il gioco
         if (game.attempt(context.message.text)) { // fa una prova con il testo
@@ -48,7 +73,7 @@ bot.on(message("text"), context => { // metodo per controllare i messaggi di tes
                     msg += "\n\nHai vinto!\nPer iniziare una nuova partita usa /new.";
                 }
                 else {
-                    msg += "\n\nHai perso, la parola era: '<b>" + game.getSelectedWord() + "</b>'.\nPer iniziare una nuova partita usa /new.";
+                    msg += "\n\nHai perso, la parola era <i><b>" + game.getSelectedWord() + "</b></i>.\nPer iniziare una nuova partita usa /new.";
                 }
             }
 

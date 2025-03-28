@@ -39,6 +39,9 @@ const wordle = (inputWords) => {
             victory = false;
             console.log(selectedWord)
         },
+        stop: () => {
+            started = false;
+        },
         attempt: (inputWord) => { // prova ad indovinare con una parola
             if (remainingAttempts <= 0 || inputWord.length !== 5) { // se ha esaurito i tentativi o la parola non è di cinque lettere
                 return false;
