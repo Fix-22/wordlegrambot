@@ -1319,6 +1319,8 @@ navig
 negai
 neghi
 negli
+negre
+negri
 nella
 nelle
 nello
@@ -1420,10 +1422,13 @@ orali
 orari
 orchi
 ordii
+ordin
+ordir
 orlai
 orler
 ormai
 ornai
+orner
 osano
 osare
 osata
@@ -1454,6 +1459,7 @@ paesi
 pagai
 paghi
 palco
+pales
 palla
 palle
 palma
@@ -1470,6 +1476,7 @@ panno
 pappa
 pappe
 parco
+parit
 parla
 parli
 parlo
@@ -2522,6 +2529,9 @@ uditi
 udito
 udiva
 udivo
+ultim
+ulula
+ululi
 ululo
 umana
 umane
